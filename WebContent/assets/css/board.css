@@ -1,0 +1,163 @@
+@charset "UTF-8";
+/* 게시판 공통 */
+.form-group {
+	padding: 0px 0px 10px 0px;
+}
+
+input[type="text"]{
+	padding: 6px 3px 6px 6px;
+}
+
+input[type="password"]{
+	padding: 6px 3px 6px 6px;
+}
+
+input[type="radio"] {
+	width: 15px;
+	height: 15px;
+	margin: 0px 20px 0px 0px;
+}
+
+input[type="checkbox"] {
+	width: 15px;
+	height: 15px;
+	margin: 0px 20px 0px 0px;
+}
+
+input[type="file"] {
+	cursor: pointer;
+}
+
+
+select {
+	padding: 6px 3px 6px 3px;
+}
+
+textarea {
+	padding: 6px 3px 6px 6px;
+	font-size: 13px;
+	font-family: "맑은 고딕", 돋움, 굴림;
+}
+
+
+.btn {
+	padding: 5px 0px 5px 0px;
+	width: 80px;
+	cursor: pointer;
+}
+
+
+#main-content-body {
+	padding: 30px 0px 20px 0px;
+	border-bottom: 1px solid #bfbfbf;
+}
+
+#main-content-footer {
+	padding: 20px 0px 20px 0px;
+	text-align: center;
+}
+
+
+/* 리스트 */
+
+
+#contents>#main-content> #main-content-header>ol{
+	padding: 8px 0px 0px 0px;
+	float: right;
+}
+
+#contents>#main-content> #main-content-header>ol>li{
+	float: left;
+}
+#contents>#main-content> #main-content-header>ol>li:after{
+	padding: 0px 2px 0px 2px;
+	content: ">";
+}
+#contents>#main-content> #main-content-header>ol>
+#root-last:after{content: none;}
+
+#contents>#main-content>#search{
+	float: right;
+	padding: 30px 0px 15px 0px;
+} 
+
+#contents>#main-content>#search>textarea{
+	float: left;
+	margin: 0px 0px 0px 500px;
+	width: 150px;
+	height: 18px;
+}
+
+#contents>#main-content>#search>button{
+	float: left;
+	margin: 0px 0px 0px 5px;
+}
+
+#contents>#main-content>table {
+	border-collapse: collapse;
+	border-top: 1px solid #bfbfbf;
+	border-bottom: 1px solid #bfbfbf;
+	text-align: center;
+	
+}
+
+#contents>#main-content>table>thead{
+	height: 30px;
+	background-color: #dddddd;
+}
+
+#contents>#main-content>table td{
+	height: 30px;
+	border-top: 1px dotted #bfbfbf;
+}
+
+#contents>#main-content> #page{
+	text-align: center;
+}
+
+#contents>#main-content> #page>p{
+	float: left;
+	padding: 15px 0px 0px 350px;
+	text-align: center;
+}
+
+#contents>#main-content> #page>p>a{
+	padding: 0px 2px 0px 2px;
+}
+
+#contents>#main-content>#write{
+	float: right;
+	padding: 10px 0px 0px 0px;
+}
+
+
+
+
+/* 글쓰기폼 */
+#main-content-body .form-title {
+	width: 80px;
+	display: inline-block;
+}
+
+#main-content-body #sel-board {
+	width: 162px;
+}
+
+#main-content-body #txt-title {
+	width: 722px;
+}
+
+#main-content-body #txt-password {
+	width: 150px;
+}
+
+#main-content-body #txt-content {
+	width: 808px;
+	height: 200px;
+}
+
+
+
+
+
+

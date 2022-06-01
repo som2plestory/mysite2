@@ -1,0 +1,90 @@
+@charset "UTF-8";
+
+/* 회원가입 */
+
+input[type="text"]{
+	padding: 6px 3px 6px 6px;
+}
+
+input[type="password"]{
+	padding: 6px 3px 6px 6px;
+}
+
+input[type="radio"] {
+	width: 15px;
+	height: 15px;
+	margin: 0px 20px 0px 0px;
+}
+
+input[type="checkbox"] {
+	width: 15px;
+	height: 15px;
+	margin: 0px 20px 0px 0px;
+}
+
+input[type="file"] {
+	cursor: pointer;
+}
+
+
+select {
+	padding: 6px 3px 6px 3px;
+}
+
+textarea {
+	padding: 6px 3px 6px 6px;
+	font-size: 13px;
+	font-family: "맑은 고딕", 돋움, 굴림;
+}
+
+
+.btn {
+	padding: 5px 0px 5px 0px;
+	width: 80px;
+	cursor: pointer;
+}
+
+#signup {
+	padding:28px 0px 0px 0px;
+	width: 1000px;
+}
+
+#signup>#signup-header>h3 {
+	padding: 18px 0px 5px 0px;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	border-bottom: 1px solid #bfbfbf
+	
+}
+
+
+#signup>#signup-body .signupform-group{
+	padding: 10px 0px 10px 0px;
+	border-bottom: 1px solid #dddddd
+}
+
+
+#signup>#signup-body .form-title {
+	padding: 6px 3px 6px 3px;
+	width: 80px;
+	display: inline-block;
+}
+
+
+input[type="text"]#signup-address{
+	margin: 10px 0px 0px 90px;
+	width: 700px;
+	cursor: pointer;
+}
+
+#signup>#signup-body #signup-pr{
+	width: 700px;
+	height: 150px;
+}
+
+
+#signupform-footer {
+	padding: 20px 0px 20px 0px;
+	text-align: center;
+}
