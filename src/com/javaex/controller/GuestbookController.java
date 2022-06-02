@@ -1,4 +1,4 @@
-package com.javaex.comtroller;
+package com.javaex.controller;
 
 public class GuestbookController {
 

@@ -1,15 +1,8 @@
 @charset "UTF-8";
+#index {margin: 40px 20px 40px 20px; }
 
-/* ******************메인본문************************** */
+#index #profile-img {float: left; width:300px; }
+#index #greetings {float: right; width:620px; text-align: left; }
 
-#img-profile {
-	margin: 0px 20px 0px 0px;
-	width: 300px;
-	float: left;
-}
 
-#greetings {
-	float: left;
-	font-size: 18px;
-}
 
