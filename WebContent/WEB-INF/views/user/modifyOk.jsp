@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,11 +67,12 @@
 						<p class="text-large bold">
 							회원정보가 수정되었습니다.<br>
 							<br>
-							<a href="/mysite2/user?action=logout" >[로그아웃하기]</a>
+							<a href="/mysite2/main" >[메인화면]</a>
+							<a href="/mysite2/user?action=logout" >[로그아웃]</a>
 						</p>
 							
 					</div>
-					<!-- //joinOK -->
+					<!-- //modifyOK -->
 				</div>
 				<!-- //user -->
 			</div>

@@ -50,12 +50,20 @@ public class UserController extends HttpServlet{
 			UserVo userVo = new UserVo(id, password, name, gender);
 			System.out.println(userVo);
 			
-			//Dao를 이용해서 저장하기
-			UserDao userDao = new UserDao();
-			userDao.insert(userVo);
+			//id 또는 비밀번호를 입력하지 않았을 때
+			if(userVo.getId().equals("") || userVo.getPassword().equals("")) {
+				System.out.println("회원가입 실패");
+				WebUtil.forward(request, response, "WEB-INF/views/user/joinForm.jsp");
+				
+			}else {
 			
-			//포워드
-			WebUtil.forward(request, response, "WEB-INF/views/user/joinOk.jsp");
+				//Dao를 이용해서 저장하기
+				UserDao userDao = new UserDao();
+				userDao.insert(userVo);
+				
+				//포워드
+				WebUtil.forward(request, response, "WEB-INF/views/user/joinOk.jsp");
+			}
 			
 		}else if("loginForm".equals(action)) {//로그인 폼
 			System.out.println("UserController>loginForm");
@@ -86,6 +94,10 @@ public class UserController extends HttpServlet{
 			//authUser null이면 --> 로그인 실패
 			if(authUser == null ) {
 				System.out.println("로그인 실패");
+				
+				//로그인 폼 포워드
+				WebUtil.forward(request, response, "WEB-INF/views/user/loginForm.jsp");
+				
 			}else {
 				System.out.println("로그인 성공");
 				//로그인 한 자의 공간을 얻고 싶어
@@ -108,40 +120,81 @@ public class UserController extends HttpServlet{
 			//메인으로 리다이렉트
 			WebUtil.redirect(request, response, "/mysite2/main");
 			
-		}else if("modifyForm".equals(action)) {//회원정보수정 폼
+		}else if("modifyForm".equals(action)) {//회원정보수정폼
 			System.out.println("UserController>modifyForm");
 			
-			//회원정보수정 폼 포워드
-			WebUtil.forward(request, response, "WEB-INF/views/user/modifyForm.jsp");
-		
+			//세션에서 사용자 정보 가져오기
+			HttpSession session = request.getSession();
+			UserVo authUser = (UserVo)session.getAttribute("authUser");
+			
+			//세션에서 불러온 정보가 없을 때
+			if(authUser == null) {
+				System.out.println("로그인이 되어있지않음");
+				
+				//로그인 폼 포워드
+				WebUtil.forward(request, response, "WEB-INF/views/user/loginForm.jsp");
+				
+			//로그인이 되어있을 때
+			}else {
+			
+				//로그인한 사용자의 no 값을 가져오기
+				int no = authUser.getNo();
+				
+				//no로 사용자 정보 가져오기
+				UserDao userDao = new UserDao();
+				UserVo userVo = userDao.getUser(no);	//no id password name gender
+				System.out.println(userVo);
+			
+				//request의 attrubute에 userVo를 넣어서 포워드
+				request.setAttribute("userVo", userVo);
+				WebUtil.forward(request, response, "WEB-INF/views/user/modifyForm.jsp");
+			}
+			
 		}else if("modify".equals(action)){//회원정보수정
 			System.out.println("UserController>modify");
 			
-			//파라미터 꺼내기*4
-			String id = request.getParameter("id");
+			
+			//세션에서 사용자 정보 가져오기
+			HttpSession session = request.getSession();
+			UserVo authUser = (UserVo)session.getAttribute("authUser");
+			System.out.println(authUser);
+			
+			// no 가져오기
+			int no = authUser.getNo();
+			
+			//파라미터*3
 			String password = request.getParameter("password");
 			String name = request.getParameter("name");
 			String gender = request.getParameter("gender");
 			
-			//System.out.println(id);
-			//System.out.println(password);
-			//System.out.println(name);
-			//System.out.println(gender);
 			
-			//Vo만들기
-			UserVo userVo = new UserVo(id, password, name, gender);
-			userVo.setPassword(id);
-			userVo.setPassword(password);
-			userVo.setPassword(name);
-			userVo.setPassword(gender);
+			//묶기 : 세션에서 가져온 no + 받은 파라미터*3
+			UserVo userVo = new UserVo();
+			userVo.setNo(no);	//세션에서 가져온 no
+			userVo.setPassword(password);	// ↓받은 파라미터*3
+			userVo.setName(name);
+			userVo.setGender(gender);
 			System.out.println(userVo);
 			
-			//Dao 이용해서 저장하기 
-			UserDao userDao = new UserDao();
-			userDao.update(userVo);
+			//비밀번호가 없을 때
+			if(userVo.getPassword().equals("")) {
+				System.out.println("회원정보 수정 실패");
+				UserDao userDao = new UserDao();
+				userVo = userDao.getUser(no);
+				request.setAttribute("userVo", userVo);
+				WebUtil.forward(request, response, "WEB-INF/views/user/modifyForm.jsp");
+				
+			}else {
+				System.out.println("회원정보 수정 성공");
 			
-			//포워드
-			WebUtil.forward(request, response, "WEB-INF/views/user/modifyOk.jsp");
+				//dao 사용
+				UserDao userDao = new UserDao();
+				int count = userDao.update(userVo);	
+				
+				//포워드
+				WebUtil.forward(request, response, "WEB-INF/views/user/modifyOk.jsp");
+			}
+			
 		}
 	}
 	
