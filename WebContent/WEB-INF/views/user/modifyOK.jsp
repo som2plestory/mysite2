@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>MYSITE-회원가입</title>
+<title>MYSITE-회원정보수정</title>
 <link href="/mysite2/assets/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="/mysite2/assets/css/user.css" rel="stylesheet" type="text/css">
 
@@ -19,8 +19,8 @@
 			</h1>
 			
 			<ul>
-				<li><a href="/mysite2/user?action=loginForm" class="btn_s">로그인</a></li>
-				<li><a href="/mysite2/user?action=joinForm" class="btn_s">회원가입</a></li>
+				<li><a href="/mysite2/user?action=logout" class="btn_s">로그아웃</a></li>
+				<li><a href="/mysite2/user?action=modifyForm" class="btn_s">회원정보수정</a></li>
 			</ul>
 			
 		</div>
@@ -50,12 +50,12 @@
 			<div id="content">
 			
 				<div id="content-head">
-					<h3>회원가입</h3>
+					<h3>회원정보수정</h3>
 					<div id="location">
 						<ul>
 							<li>홈</li>
 							<li>회원</li>
-							<li class="last">회원가입</li>
+							<li class="last">회원정보</li>
 						</ul>
 					</div>
 					<div class="clear"></div>
@@ -63,12 +63,12 @@
 				<!-- //content-head -->
 	
 				<div id="user">
-					<div id="joinOK">
+					<div id="modifyOK">
 					
 						<p class="text-large bold">
-							회원가입을 축하합니다.<br>
+							회원정보가 수정되었습니다.<br>
 							<br>
-							<a href="/mysite2/user?action=loginForm" >[로그인하기]</a>
+							<a href="/mysite2/user?action=logout" >[로그아웃하기]</a>
 						</p>
 							
 					</div>

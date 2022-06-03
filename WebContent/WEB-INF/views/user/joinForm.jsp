@@ -2,10 +2,6 @@
     
 <%@ page import="com.javaex.vo.UserVo" %>
 
-<%
-	UserVo authUser = (UserVo)session.getAttribute("authoUser");
-	System.out.println(authUser);
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,12 +20,10 @@
 				<a href="/mysite2/main">MySite</a>
 			</h1>
 
-			<%if(authUser == null){%> <!-- 로그인 실패, 로그인 전 -->
 				<ul>
 					<li><a href="/mysite2/user?action=loginForm" class="btn_s">로그인</a></li>
 					<li><a href="/mysite2/user?action=joinForm" class="btn_s">회원가입</a></li>
 				</ul>	
-			<%}%>
 			
 		</div>
 		<!-- //header -->

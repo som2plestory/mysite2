@@ -90,7 +90,7 @@ public class UserDao {
 			return count;
 		}
 		
-		//사용자 정보 가져오기(로그인시 사용)
+		//사용자 정보 가져오기(로그인된 정보 확인)
 		public UserVo getUser(UserVo userVo) {
 			UserVo authUser = null;
 			
@@ -101,7 +101,8 @@ public class UserDao {
 				//SQL문 준비
 				String query = ""; // 쿼리문 문자열만들기, ? 주의
 				query += " select no, ";
-				query += "  	  name";
+				query += " 		  id, ";
+				query += "  	  name ";
 				query += " from users ";
 				query += " where id = ? ";
 				query += " and password = ? ";
@@ -118,9 +119,11 @@ public class UserDao {
 				// 4.결과처리
 				while(rs.next()) {
 					int no = rs.getInt("no");
+					String id = rs.getString("id");
 					String name = rs.getString("name");
 					
 					authUser = new UserVo();
+					authUser.setId(id);
 					authUser.setNo(no);
 					authUser.setName(name);
 				}
@@ -131,5 +134,43 @@ public class UserDao {
 			this.close();
 			
 			return authUser;
+		}
+		
+		//사용자 정보 수정하기(회원정보수정)
+		public int update(UserVo userVo) {
+			int count = 0;
+			
+			this.getConnection();
+			
+			try {
+				// 3. SQL문 준비 / 바인딩 / 실행
+				//SQL문 준비
+				String query = ""; // 쿼리문 문자열만들기, ? 주의
+				query += " UPDATE users ";
+				query += " SET  password = ? ";
+				query += " 		name = ? ";
+				query += " 		gender = ? ";
+				query += " where id = ? ";
+				System.out.println(query);
+				
+				//바인딩
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, userVo.getPassword()); 
+				pstmt.setString(2, userVo.getName());
+				pstmt.setString(3, userVo.getGender());
+				pstmt.setString(4, userVo.getId());
+				
+				//실행
+				count = pstmt.executeUpdate(); // 쿼리문 실행
+
+				// 4.결과처리
+				System.out.println("[" + count + "건 수정되었습니다.]");
+
+			} catch (SQLException e) {
+				System.out.println("error:" + e);
+			}
+			this.close();
+			
+			return count;
 		}
 }

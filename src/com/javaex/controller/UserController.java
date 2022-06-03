@@ -97,7 +97,7 @@ public class UserController extends HttpServlet{
 				WebUtil.redirect(request, response, "/mysite2/main");
 			}
 		
-		}else if("logout".equals(action)) {
+		}else if("logout".equals(action)) {//로그아웃
 			System.out.println("UserController>logout");
 			
 			//세션값을 지운다
@@ -107,6 +107,41 @@ public class UserController extends HttpServlet{
 			
 			//메인으로 리다이렉트
 			WebUtil.redirect(request, response, "/mysite2/main");
+			
+		}else if("modifyForm".equals(action)) {//회원정보수정 폼
+			System.out.println("UserController>modifyForm");
+			
+			//회원정보수정 폼 포워드
+			WebUtil.forward(request, response, "WEB-INF/views/user/modifyForm.jsp");
+		
+		}else if("modify".equals(action)){//회원정보수정
+			System.out.println("UserController>modify");
+			
+			//파라미터 꺼내기*4
+			String id = request.getParameter("id");
+			String password = request.getParameter("password");
+			String name = request.getParameter("name");
+			String gender = request.getParameter("gender");
+			
+			//System.out.println(id);
+			//System.out.println(password);
+			//System.out.println(name);
+			//System.out.println(gender);
+			
+			//Vo만들기
+			UserVo userVo = new UserVo(id, password, name, gender);
+			userVo.setPassword(id);
+			userVo.setPassword(password);
+			userVo.setPassword(name);
+			userVo.setPassword(gender);
+			System.out.println(userVo);
+			
+			//Dao 이용해서 저장하기 
+			UserDao userDao = new UserDao();
+			userDao.insert(userVo);
+			
+			//포워드
+			WebUtil.forward(request, response, "WEB-INF/views/user/modifyOk.jsp");
 		}
 	}
 	
