@@ -138,7 +138,7 @@ public class UserController extends HttpServlet{
 			
 			//Dao 이용해서 저장하기 
 			UserDao userDao = new UserDao();
-			userDao.insert(userVo);
+			userDao.update(userVo);
 			
 			//포워드
 			WebUtil.forward(request, response, "WEB-INF/views/user/modifyOk.jsp");
