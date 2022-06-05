@@ -29,9 +29,9 @@
 		<div id="nav">
 			<ul class="clearfix">
 				<li><a href="">입사지원서</a></li>
-				<li><a href="">게시판</a></li>
+				<li><a href="/mysite2/bc">게시판</a></li>
 				<li><a href="">갤러리</a></li>
-				<li><a href="">방명록</a></li>
+				<li><a href="/mysite2/guestbook">방명록</a></li>
 			</ul>
 		</div>
 		<!-- //nav -->
@@ -40,9 +40,9 @@
 			<div id="aside">
 				<h2>회원</h2>
 				<ul>
-					<li>회원정보</li>
-					<li>로그인</li>
-					<li>회원가입</li>
+					<li><a href="/mysite2/user?action=modifyForm">회원정보수정</a></li>
+					<li><a href="/mysite2/user?action=loginForm">로그인</a></li>
+					<li><a href="/mysite2/user?action=joinForm">회원가입</a></li>
 				</ul>
 			</div>
 			<!-- //aside -->
