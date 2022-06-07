@@ -29,6 +29,10 @@ public class UserController extends HttpServlet{
 		if("joinForm".equals(action)) {//회원가입폼
 			System.out.println("UserController>joinForm");
 			
+			HttpSession session = request.getSession();
+			session.removeAttribute("authUser");
+			session.invalidate();
+			
 			//회원가입 폼 포워드
 			WebUtil.forward(request, response, "WEB-INF/views/user/joinForm.jsp");
 		
@@ -67,6 +71,10 @@ public class UserController extends HttpServlet{
 			
 		}else if("loginForm".equals(action)) {//로그인 폼
 			System.out.println("UserController>loginForm");
+			
+			HttpSession session = request.getSession();
+			session.removeAttribute("authUser");
+			session.invalidate();
 			
 			//로그인 폼 포워드
 			WebUtil.forward(request, response, "WEB-INF/views/user/loginForm.jsp");

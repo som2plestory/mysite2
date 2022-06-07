@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,38 +13,15 @@
 <body>
 	<div id="wrap">
 
-		<div id="header" class="clearfix">
-			<h1>
-				<a href="/mysite2/main">MySite</a>
-			</h1>
-
-			<ul>
-				<li><a href="/mysite2/user?action=loginForm" class="btn_s">로그인</a></li>
-				<li><a href="/mysite2/user?action=joinForm" class="btn_s">회원가입</a></li>
-			</ul>
-			
-		</div>
+		<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
 		<!-- //header -->
 
-		<div id="nav">
-			<ul class="clearfix">
-				<li><a href="">입사지원서</a></li>
-				<li><a href="/mysite2/bc">게시판</a></li>
-				<li><a href="">갤러리</a></li>
-				<li><a href="/mysite2/guestbook">방명록</a></li>
-			</ul>
-		</div>
+		<c:import url="/WEB-INF/views/includes/nav.jsp"></c:import>
 		<!-- //nav -->
 
 		<div id="container" class="clearfix">
-			<div id="aside">
-				<h2>회원</h2>
-				<ul>
-					<li><a href="/mysite2/user?action=modifyForm">회원정보수정</a></li>
-					<li><a href="/mysite2/user?action=loginForm">로그인</a></li>
-					<li><a href="/mysite2/user?action=joinForm">회원가입</a></li>
-				</ul>
-			</div>
+			
+			<c:import url="/WEB-INF/views/includes/aside_user.jsp"></c:import>
 			<!-- //aside -->
 
 			<div id="content">
@@ -94,9 +73,8 @@
 		</div>
 		<!-- //container  -->
 
-		<div id="footer">
-			Copyright ⓒ 2022 이지희. All right reserved
-		</div>
+		<!-- footer -->
+		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 		<!-- //footer -->
 
 	</div>

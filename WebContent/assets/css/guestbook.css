@@ -55,13 +55,14 @@
 /****************************************************************/
 #guestbook #guestInfo td,
 #guestbook #guestInfo th {
-	padding: 10px 0px 10px 0px;
+	padding: 10px 5px 10px 5px;
 }
 
 #guestbook #guestInfo {margin: 0px 0px 30px 0px;}
 
 #guestbook #guestInfo .guestDeleteContent{
-	height: 500px;
+	height: 150px;
+	padding: 10px;
 }
 
 /****************************************************************/

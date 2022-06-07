@@ -1,15 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@ page import="com.javaex.vo.GuestbookVo" %>
-<%@ page import="com.javaex.vo.UserVo" %>
-
-
-<%
-	UserVo authUser = (UserVo)session.getAttribute("authUser");
-	GuestbookVo wrGuestVo = (GuestbookVo)request.getAttribute("wrGuestVo");
-	System.out.println(wrGuestVo);
-	
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
@@ -22,45 +12,16 @@
 <body>
 	<div id="wrap">
 
-		<div id="header" class="clearfix">
-			<h1>
-				<a href="/mysite2/main">MySite</a>
-			</h1>
-
-			<%if(authUser == null){%>   <!-- 로그인 실패, 로그인전 -->
-				<ul>
-					<li><a href="/mysite2/user?action=loginForm" class="btn_s">로그인</a></li>
-					<li><a href="/mysite2/user?action=joinForm" class="btn_s">회원가입</a></li>
-				</ul>
-			<%}else {%> <!-- 로그인 성공 -->
-				<ul>
-					<li><%=authUser.getName() %>님 안녕하세요^^</li>
-					<li><a href="/mysite2/user?action=logout" class="btn_s">로그아웃</a></li>
-					<li><a href="/mysite2/user?action=modifyForm" class="btn_s">회원정보수정</a></li>
-				</ul>
-			<%}%>
-			
-		</div>
+		<!-- header -->
+		<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
 		<!-- //header -->
 
-		<div id="nav">
-			<ul class="clearfix">
-				<li><a href="">입사지원서</a></li>
-				<li><a href="">게시판</a></li>
-				<li><a href="">갤러리</a></li>
-				<li><a href="/mysite2/guestbook">방명록</a></li>
-			</ul>
-		</div>
+		<c:import url="/WEB-INF/views/includes/nav.jsp"></c:import>
 		<!-- //nav -->
 
 		<div id="container" class="clearfix">
-			<div id="aside">
-				<h2>방명록</h2>
-				<ul>
-					<li><a href="/mysite2/guestbook">일반방명록</a></li>
-					<li>ajax방명록</li>
-				</ul>
-			</div>
+			
+			<c:import url="/WEB-INF/views/includes/aside_guestbook.jsp"></c:import>
 			<!-- //aside -->
 
 			<div id="content">
@@ -87,12 +48,12 @@
 							</colgroup>
 							<tbody>
 								<tr>
-									<td class="text-center"><%=wrGuestVo.getNo() %></td>
-									<td class="text-center"><%=wrGuestVo.getName() %></td>
+									<td>${wrGuestVo.no}</td>
+									<td>${wrGuestVo.name}</td>
 								</tr>
 								<tr>
 									<td colspan=2 class="guestDeleteContent">
-										<%= wrGuestVo.getContent() %>
+										${wrGuestVo.content}
 									</td>
 								</tr>
 							</tbody>
@@ -114,7 +75,7 @@
 								</tr>
 							</tbody>
 						</table>
-						<input type="hidden" name="no" value="<%=request.getParameter("no")%>"><br>
+						<input type="hidden" name="no" value="${Param.no}"><br>
 						<input type="hidden" name="action" value="delete">
 					</form>
 					
@@ -126,9 +87,8 @@
 		</div>
 		<!-- //container  -->
 		
-		<div id="footer">
-			Copyright ⓒ 2022 이지희. All right reserved
-		</div>
+		<!-- footer -->
+		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 		<!-- //footer -->
 
 	</div>
