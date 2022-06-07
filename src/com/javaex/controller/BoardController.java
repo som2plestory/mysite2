@@ -23,7 +23,7 @@ public class BoardController extends HttpServlet{
 		String action = request.getParameter("action");
 		System.out.println(action);
 		
-		if ("add".equals(action)) {
+		if ("".equals(action)) {
 			
 		}else {
 			

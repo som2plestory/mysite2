@@ -6,6 +6,9 @@
 
 <%
 	UserVo authUser = (UserVo)session.getAttribute("authUser");
+	GuestbookVo wrGuestVo = (GuestbookVo)request.getAttribute("wrGuestVo");
+	System.out.println(wrGuestVo);
+	
 %>
 
 <!DOCTYPE html>
@@ -77,6 +80,24 @@
 	
 				<div id="guestbook">
 					<form action="/mysite2/guestbook" method="post">
+						<table id="guestInfo">
+							<colgroup>
+								<col style="width: 10%;">
+								<col style="width: 90%;">
+							</colgroup>
+							<tbody>
+								<tr>
+									<td class="text-center"><%=wrGuestVo.getNo() %></td>
+									<td class="text-center"><%=wrGuestVo.getName() %></td>
+								</tr>
+								<tr>
+									<td colspan=2 class="guestDeleteContent">
+										<%= wrGuestVo.getContent() %>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					
 						<table id="guestDelete">
 							<colgroup>
 								<col style="width: 10%;">
@@ -84,18 +105,17 @@
 								<col style="width: 25%;">
 								<col style="width: 25%;">
 							</colgroup>
-							<tr>
-								<td></td>
-							</tr>
-							<tr>
-								<td><label for="input-gpw">비밀번호</label></td>
-								<td><input type="password" id="input-gpw" name="password" value=""></td>
-								<td class="text-left"><button type="submit">삭제</button></td>
-								<td><a href="/guestbook2/guestbook">[메인으로 돌아가기]</a></td>
-							</tr>
+							<tbody>
+								<tr>
+									<td class="text-center"><label for="input-upassword">비밀번호</label></td>
+									<td class="text-center"><input type="password" id="input-upassword" name="password" value=""></td>
+									<td class="text-center"><button type="submit">삭제</button></td>
+									<td class="text-center"><a href="/mysite2/main">[메인으로 돌아가기]</a></td>
+								</tr>
+							</tbody>
 						</table>
+						<input type="hidden" name="no" value="<%=request.getParameter("no")%>"><br>
 						<input type="hidden" name="action" value="delete">
-						<input type="hidden" name="no" value="<%=request.getParameter("no")%>">
 					</form>
 					
 				</div>

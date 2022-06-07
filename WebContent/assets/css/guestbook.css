@@ -51,11 +51,25 @@
 
 
 /****************************************************************/
-/* 방명록 삭제폼(비밀번호)***************************************/
+/* 방명록 삭제폼 상단(방명록 정보)***************************************/
+/****************************************************************/
+#guestbook #guestInfo td,
+#guestbook #guestInfo th {
+	padding: 10px 0px 10px 0px;
+}
+
+#guestbook #guestInfo {margin: 0px 0px 30px 0px;}
+
+#guestbook #guestInfo .guestDeleteContent{
+	height: 500px;
+}
+
+/****************************************************************/
+/* 방명록 삭제폼 하단(비밀번호)***************************************/
 /****************************************************************/
 #guestbook #guestDelete td, 
 #guestbook #guestDelete th {
-	padding: 5px 0px 5px 0px ;
+	padding: 5px 5px 5px 5px ;
 }
 
 #guestbook #guestDelete input[type="password"]{width: 96%; }
@@ -65,6 +79,7 @@
     width: 100px;
     height: 30px;
     padding: 0px 5px 0px 5px;
-    margin: 0px 0px 0px 10px;
+    margin: 0px 10px 0px 10px;
     cursor: pointer;
 }
+

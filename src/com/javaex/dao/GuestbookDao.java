@@ -174,7 +174,7 @@ public class GuestbookDao {
 		
 		
 		//방명록 작성자 정보 가져오기(비밀번호 확인용)
-		public GuestbookVo getGuest(GuestbookVo guestVo) {
+		public GuestbookVo checkGuest(GuestbookVo guestVo) {
 			GuestbookVo wrGuest = null;
 			
 			this.getConnection();
@@ -188,7 +188,6 @@ public class GuestbookDao {
 				query += " from guestbook ";
 				query += " where no = ? ";
 				query += " and password = ? ";
-				System.out.println(query);
 				
 				//바인딩
 				pstmt = conn.prepareStatement(query);
@@ -216,9 +215,9 @@ public class GuestbookDao {
 			return wrGuest;
 		}
 		
-		//방명록 작성자 정보 가져오기(작성된 방명록이 있는지 확인용)
-		public GuestbookVo checkGuest(int no) {
-			GuestbookVo guestVo = null;
+		//방명록 정보 가져오기(방명록 삭제 폼- 삭제할 방명록 정보 확인) no name password content reg_date
+		public GuestbookVo getGuest(int no) {
+			GuestbookVo wrGuestVo = null;
 			
 			this.getConnection();
 			
@@ -226,10 +225,14 @@ public class GuestbookDao {
 				// 3. SQL문 준비 / 바인딩 / 실행
 				//SQL문 준비
 				String query = ""; // 쿼리문 문자열만들기, ? 주의
-				query += " select no ";
+				query += " select no, ";
+				query += " 		  name, ";
+				query += " 		  password, ";
+				query += " 		  content, ";
+				query += " 		  reg_date ";
 				query += " from guestbook ";
 				query += " where no = ? ";
-				System.out.println(query);
+				//System.out.println(query);
 				
 				//바인딩
 				pstmt = conn.prepareStatement(query);
@@ -241,9 +244,13 @@ public class GuestbookDao {
 				// 4.결과처리
 				while(rs.next()) {
 					int guestNo = rs.getInt("no");
+					String name = rs.getString("name");
+					String password = rs.getString("password");
+					String content = rs.getString("content");
+					String regDate = rs.getString("reg_date");
 					
-					guestVo = new GuestbookVo(guestNo);
-					System.out.println("guest: "+guestVo);
+					wrGuestVo = new GuestbookVo(guestNo, name, password, content, regDate);
+					System.out.println("wrGuestVo: "+wrGuestVo);
 				}
 
 			} catch (SQLException e) {
@@ -252,7 +259,7 @@ public class GuestbookDao {
 			
 			this.close();
 			
-			return guestVo;
+			return wrGuestVo;
 			
 		}
 }
