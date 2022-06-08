@@ -65,6 +65,7 @@ public class GuestbookController extends HttpServlet{
 				//request의 attrubute에 guestVo를 넣어서 포워드
 				request.setAttribute("wrGuestVo", wrGuestVo);
 				WebUtil.forward(request, response, "/WEB-INF/views/guestbook/deleteForm.jsp");
+				System.out.println(wrGuestVo);
 			}
 			
 		} else if ("delete".equals(action)) { //방명록삭제

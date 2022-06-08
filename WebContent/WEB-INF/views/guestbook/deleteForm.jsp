@@ -44,15 +44,17 @@
 						<table id="guestInfo">
 							<colgroup>
 								<col style="width: 10%;">
-								<col style="width: 90%;">
+								<col style="width: 70%;">
+								<col style="width: 20%;">
 							</colgroup>
 							<tbody>
 								<tr>
 									<td>${wrGuestVo.no}</td>
 									<td>${wrGuestVo.name}</td>
+									<td class="text-center">${wrGuestVo.regDate}</td>
 								</tr>
 								<tr>
-									<td colspan=2 class="guestDeleteContent">
+									<td colspan=3 class="guestDeleteContent">
 										${wrGuestVo.content}
 									</td>
 								</tr>

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.javaex.vo.GuestbookVo;
-import com.javaex.vo.UserVo;
 
 public class GuestbookDao {
 	// 0. import java.sql.*;
@@ -188,6 +187,7 @@ public class GuestbookDao {
 				query += " from guestbook ";
 				query += " where no = ? ";
 				query += " and password = ? ";
+				System.out.println(query);
 				
 				//바인딩
 				pstmt = conn.prepareStatement(query);
