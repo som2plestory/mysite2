@@ -27,10 +27,12 @@ public class BoardController extends HttpServlet{
 		//포스트 방식일때 한글깨짐 방지
 		request.setCharacterEncoding("UTF-8");
 		
+		//페이지이름 명명
+		request.setAttribute("aside", "board");
+		
 		//action파라미터 꺼내기
 		String action = request.getParameter("action");
 		System.out.println(action);
-		
 		
 		if ("read".equals(action)) {
 			System.out.println("BoardController>read");

@@ -16,6 +16,11 @@ public class BoardVo extends UserVo{
 		super();
 	}
 	
+	public BoardVo(int no) {
+		super();
+		this.no = no;
+	}
+	
 	
 	
 	public BoardVo(int no, String title, int hit, String regDate, int userNo) {

@@ -22,6 +22,12 @@ public class UserController extends HttpServlet{
 	//메소드 일반
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//포스트 방식일때 한글깨짐 방지
+		request.setCharacterEncoding("UTF-8");
+		
+		//페이지이름 명명
+		request.setAttribute("aside", "user");
+		
 		//action을 꺼낸다
 		String action = request.getParameter("action");
 		//System.out.println(action);
