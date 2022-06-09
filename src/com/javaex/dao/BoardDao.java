@@ -105,6 +105,53 @@ public class BoardDao {
 	}
 	
 	
+	//게시글 검색(제목으로)
+	public List<BoardVo> searchBoard(String keyword) {
+		//String search = sc.next();
+		List<BoardVo> searchBoard = new ArrayList<BoardVo>();
+		getConnection();
+		try {
+			//SQL문
+			String query = "";
+			query += " select b.no, ";
+			query += " 		  title, ";
+			query += " 		  name, ";
+			query += "   	  hit, ";
+			query += "   	  reg_date, ";
+			query += "   	  user_no ";
+			query += " from	board b, users u ";
+			query += " where b.user_no = u.no ";
+			query += " and title like ? ";
+			query += " order by b.no desc ";
+			
+			//바인딩
+			String searchKeyword = '%'+keyword+'%';
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, searchKeyword);
+			//실행
+			rs = pstmt.executeQuery();
+			//결과처리
+			while(rs.next()) {
+				int no =  rs.getInt("no");
+				String title = rs.getString("title");
+				String name = rs.getString("name");
+				int hit =  rs.getInt("hit");
+				String regDate = rs.getString("reg_date");
+				int userNo =  rs.getInt("user_no");
+				
+				BoardVo boardVo = new BoardVo(no, title, hit, regDate, userNo);
+				boardVo.setName(name);
+				
+				searchBoard.add(boardVo);
+			}
+		} catch (SQLException e) {
+		    System.out.println("error:" + e);
+		}
+		close();
+		return searchBoard;
+	}
+	
+	
 	//게시글 삭제
 	public int boardDelete(BoardVo boardVo) {
 		int count = -1;

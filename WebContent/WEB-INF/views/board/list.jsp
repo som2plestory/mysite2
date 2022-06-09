@@ -43,9 +43,10 @@
 	
 				<div id="board">
 					<div id="list">
-						<form action="boardSerach" method="get">
+						<form action="" method="get">
 							<div class="form-group text-right">
-								<input type="text">
+								<input type="hidden" name="action" value="search">
+								<input type="text" name="keyword" value="">
 								<button type="submit" id=btn_search>검색</button>
 							</div>
 						</form>
@@ -69,7 +70,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${boardList}" var="boardVo" varStatus="status">
+								<c:forEach items="${searchList}" var="boardVo" varStatus="status">
 									<tr>
 										<td>${boardVo.no}</td>
 										<td class="text-left"><a href="/mysite2/board?action=read&no=${boardVo.no}">${boardVo.title}</a></td>

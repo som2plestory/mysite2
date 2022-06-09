@@ -13,7 +13,7 @@ import com.javaex.dao.UserDao;
 import com.javaex.util.WebUtil;
 import com.javaex.vo.UserVo;
 
-@WebServlet("/user")
+@WebServlet(value = "/user", name = "user")
 public class UserController extends HttpServlet{
 
 	//필드 
@@ -26,7 +26,7 @@ public class UserController extends HttpServlet{
 		request.setCharacterEncoding("UTF-8");
 		
 		//페이지이름 명명
-		request.setAttribute("aside", "user");
+		request.setAttribute("controller", "user");
 		
 		//action을 꺼낸다
 		String action = request.getParameter("action");

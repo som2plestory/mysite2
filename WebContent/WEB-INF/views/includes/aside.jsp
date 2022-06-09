@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div id="aside">
-		<c:if test="${aside == 'user'}">
+		<c:if test="${controller.equals('user')}">
 			<h2>회원</h2>
 			<ul>
 				<li><a href="/mysite2/user?action=modifyForm">회원정보수정</a></li>
@@ -18,14 +18,14 @@
 				<li><a href="/mysite2/user?action=joinForm">회원가입</a></li>
 			</ul>
 		</c:if>
-		<c:if test="${aside == 'guestbook'}">
+		<c:if test="${controller.equals('guestbook')}">
 			<h2>방명록</h2>
 			<ul>
 				<li><a href="/mysite2/guestbook">일반방명록</a></li>
 				<li>ajax방명록</li>
 			</ul>
 		</c:if>
-		<c:if test="${aside == 'board'}">
+		<c:if test="${controller.equals('board')}">
 			<h2>게시판</h2>
 			<ul>
 				<li><a href="/mysite2/board">일반게시판</a></li>

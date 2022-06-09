@@ -28,13 +28,25 @@ public class BoardController extends HttpServlet{
 		request.setCharacterEncoding("UTF-8");
 		
 		//페이지이름 명명
-		request.setAttribute("aside", "board");
+		request.setAttribute("controller", "board");
 		
 		//action파라미터 꺼내기
 		String action = request.getParameter("action");
 		System.out.println(action);
 		
-		if ("read".equals(action)) {
+		if ("search".equals(action)) {
+			System.out.println("BoardController>search");
+			
+			String keyword = request.getParameter("keyword");
+			System.out.println("keyword: "+keyword);
+			
+			BoardDao boardDao = new BoardDao();
+			List<BoardVo> searchList = boardDao.searchBoard(keyword); 
+			
+			request.setAttribute("searchList", searchList);
+			WebUtil.forward(request, response, "/WEB-INF/views/board/list.jsp");
+			
+		}else if("read".equals(action)) {
 			System.out.println("BoardController>read");
 			
 			int no = Integer.parseInt(request.getParameter("no"));
@@ -179,8 +191,7 @@ public class BoardController extends HttpServlet{
 			List<BoardVo> boardList = boardDao.getBoardList(); 
 			
 			request.setAttribute("boardList", boardList);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/board/list.jsp");
-			rd.forward(request, response);
+			WebUtil.forward(request, response, "/WEB-INF/views/board/list.jsp");
 		}
 	}
 	
