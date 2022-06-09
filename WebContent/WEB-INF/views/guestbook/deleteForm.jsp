@@ -73,7 +73,7 @@
 									<td class="text-center"><label for="input-upassword">비밀번호</label></td>
 									<td class="text-center"><input type="password" id="input-upassword" name="password" value=""></td>
 									<td class="text-center"><button type="submit">삭제</button></td>
-									<td class="text-center"><a href="/mysite2/main">[메인으로 돌아가기]</a></td>
+									<td class="text-center"><a href="/mysite2/guestbook">[목록으로 돌아가기]</a></td>
 								</tr>
 							</tbody>
 						</table>

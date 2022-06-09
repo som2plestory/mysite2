@@ -75,7 +75,7 @@
 								</span>
 							</div>
 							<c:if test="${boardVo.userNo == authUser.no}">
-								<a id="btn_modify" href="/mysite2/board?action=remove&no${boardVo.no}">수정</a>
+								<a id="btn_modify" href="/mysite2/board?action=modifyForm&no=${boardVo.no}">수정</a>
 							</c:if>
 								<a id="btn_modify" href="/mysite2/board">목록</a>
 						</form>

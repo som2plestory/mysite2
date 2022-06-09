@@ -78,7 +78,6 @@ public class BoardDao {
 			
 			// 바인딩
 			pstmt = conn.prepareStatement(query);
-			System.out.println(query);
 			
 			//ResultSet 가져오기
 			rs = pstmt.executeQuery();
@@ -97,7 +96,6 @@ public class BoardDao {
 				boardVo.setName(name);
 				
 				boardList.add(boardVo);
-				System.out.println(boardVo);
 			}
 		} catch (SQLException e) { 
 			System.out.println("error:" + e);
@@ -119,7 +117,6 @@ public class BoardDao {
 			query += " delete from board ";
 			query += " where no = ? ";
 			query += " and user_no = ? ";
-			System.out.println(query);
 			
 			// 바인딩
 			pstmt = conn.prepareStatement(query);
@@ -161,7 +158,6 @@ public class BoardDao {
 			query += " from	board b, users u ";
 			query += " where b.user_no = u.no ";
 			query += " and b.no = ? ";
-			System.out.println(query);
 			
 			// 바인딩
 			pstmt = conn.prepareStatement(query);
@@ -182,6 +178,8 @@ public class BoardDao {
 				String regDate = rs.getString("reg_date");
 				int userNo =  rs.getInt("user_no");
 				
+				content = content.replace("\r\n","<br>");
+				
 				boardVo = new BoardVo(boardNo, title, content, hit, regDate, userNo);
 				boardVo.setName(name);
 				
@@ -195,6 +193,40 @@ public class BoardDao {
 	}
 	
 	
+	//다른 사람의 글을 읽었을 때 조회수 1 상승
+	//게시글 읽기(글 한개 조회 - 조회수 상승)
+	public int hitUp(BoardVo boardVo) {
+		int count = -1 ;
+		this.getConnection();
+		try {
+			// 3. SQL문  준비  / 바인딩  / 실행 
+			// SQL문 준비
+			String query = "";
+			query += " update board ";
+			query += " set hit = ? ";
+			query += " where no = ? ";
+			
+			// 바인딩
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, boardVo.getHit()+1);	//조회수 1 상승
+			pstmt.setInt(2, boardVo.getNo());
+			//System.out.println(query);
+			
+			//ResultSet 가져오기
+			count = pstmt.executeUpdate();
+			
+			// 4.결과처리
+			System.out.println("[게시글 "+boardVo.getNo()+"의 조회수가"+count + " 상승되었습니다.]");
+			
+		} catch (SQLException e) { 
+			System.out.println("error:" + e);
+		} 
+		close();
+		return count;
+	}
+	
+	
+	
 	//게시글 작성
 	public int boardWrite(BoardVo boardVo) {
 		int count = -1;
@@ -204,7 +236,7 @@ public class BoardDao {
 			// 3. SQL문 준비 / 바인딩 / 실행
 			// SQL문 준비
 			String query = "";
-			query += " insert into board (no, title, content, hit, reg_date, userNo) ";
+			query += " insert into board "; //(no, title, content, hit, reg_date, userNo)
 			query += " values (seq_board_no.nextval, ?, ?, 0, sysdate, ? ) ";
 
 			// 바인딩
@@ -226,6 +258,81 @@ public class BoardDao {
 
 		this.close();
 		return count;
+	}
+	
+	
+	//게시글 수정
+	public int boardModify(BoardVo boardVo) {
+		int count = -1;
+		getConnection();
+		
+		try {
+			// 3. SQL문 준비 / 바인딩 / 실행
+			// SQL문 준비
+			String query = "";
+			query += " update board "; 
+			query += " set  title = ?, ";
+			query += " 		content = ? ";
+			query += " where no = ? ";
+
+			// 바인딩
+			pstmt = conn.prepareStatement(query);
+
+			pstmt.setString(1, boardVo.getTitle());
+			pstmt.setString(2, boardVo.getContent());
+			pstmt.setInt(3, boardVo.getNo());
+
+			// 실행
+			count = pstmt.executeUpdate();
+
+			// 4.결과처리
+			System.out.println("["+count + "건 수정되었습니다.]");
+		
+		}catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+
+		this.close();
+		return count;
+	}
+	
+	
+	//게시글 작성자 확인(수정되는지)
+	public BoardVo checkWriter(int no) {
+		BoardVo boardVo = null;
+		this.getConnection();
+		try {
+			// 3. SQL문  준비  / 바인딩  / 실행 
+			// SQL문 준비
+			String query = "";
+			query += " select no, ";
+			query += "   	  user_no ";
+			query += " from	board ";
+			query += " where no = ? ";
+			
+			// 바인딩
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, no);
+			
+			//ResultSet 가져오기
+			rs = pstmt.executeQuery();
+			
+			// 4.결과처리
+			//반복문으로 Vo 만들기	List에 추가하기
+			while(rs.next()) {
+				int boardNo =  rs.getInt("no");
+				int userNo =  rs.getInt("user_no");
+				
+				boardVo = new BoardVo();
+				boardVo.setNo(boardNo);
+				boardVo.setUserNo(userNo);
+				
+			}
+		} catch (SQLException e) { 
+			System.out.println("error:" + e);
+		} 
+		close();
+		return boardVo;
 	}
 
 }
