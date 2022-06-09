@@ -23,7 +23,7 @@
 		
 		<div id="container" class="clearfix">
 			
-			<c:import url="/WEB-INF/views/includes/aside.jsp"></c:import>
+			<c:import url="/WEB-INF/views/includes/aside/aside_board.jsp"></c:import>
 			<!-- //aside -->
 
 			<div id="content">
@@ -70,7 +70,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${searchList}" var="boardVo" varStatus="status">
+								<c:forEach items="${searchList}" var="boardVo" begin="0" end="10">
 									<tr>
 										<td>${boardVo.no}</td>
 										<td class="text-left"><a href="/mysite2/board?action=read&no=${boardVo.no}">${boardVo.title}</a></td>
@@ -86,18 +86,39 @@
 						</table>
 			
 						<div id="paging">
+							<input type="hidden" name="action" value="">
 							<ul>
 								<li><a href="">◀</a></li>
-								<li class="active"><a href="">1</a></li>
-								<li><a href="">2</a></li>
-								<li><a href="">3</a></li>
-								<li><a href="">4</a></li>
-								<li><a href="">5</a></li>
-								<li><a href="">6</a></li>
-								<li><a href="">7</a></li>
-								<li><a href="">8</a></li>
-								<li><a href="">9</a></li>
-								<li><a href="">10</a></li>
+								<li <c:if test = "${pageStart%10 == 1}">class="active"</c:if>>
+									<a href="">${pageStart}</a>
+								</li>
+								<li <c:if test = "${(pageStart+1)%10 == 2}">class="active"</c:if>>
+									<a href="/mysite2/board?action=">${pageStart+1}</a>
+								</li>
+								<li <c:if test = "${(pageStart+2)%10 == 3}">class="active"</c:if>>
+									<a href="">${pageStart+2}</a>
+								</li>
+								<li <c:if test = "${(pageStart+3)%10 == 4}">class="active"</c:if>>
+									<a href="">${pageStart+3}</a>
+								</li>
+								<li <c:if test = "${(pageStart+4)%10 == 5}">class="active"</c:if>>
+									<a href="">${pageStart+4}</a>
+								</li>
+								<li <c:if test = "${(pageStart+5)%10 == 6}">class="active"</c:if>>
+									<a href="">${pageStart+5}</a>
+								</li>
+								<li <c:if test = "${(pageStart+6)%10 == 7}">class="active"</c:if>>
+									<a href="">${pageStart+6}</a>
+								</li>
+								<li <c:if test = "${(pageStart+7)%10 == 8}">class="active"</c:if>>
+									<a href="">${pageStart+7}</a>
+								</li>
+								<li <c:if test = "${(pageStart+8)%10 == 9}">class="active"</c:if>>
+									<a href="">${pageStart+8}</a>
+								</li>
+								<li <c:if test = "${(pageStart+9)%10== 10}">class="active"</c:if>>
+									<a href="">${pageStart+9}</a>
+								</li>
 								<li><a href="">▶</a></li>
 							</ul>
 							

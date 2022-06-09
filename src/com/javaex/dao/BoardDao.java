@@ -55,7 +55,9 @@ public class BoardDao {
 		}
 	}
 	
-		
+	
+	/*
+	//searchBoard로 통합
 	//게시글 리스트
 	public List<BoardVo> getBoardList() {
 		// 리스트로 만들기
@@ -96,6 +98,7 @@ public class BoardDao {
 				boardVo.setName(name);
 				
 				boardList.add(boardVo);
+				System.out.println(boardVo);
 			}
 		} catch (SQLException e) { 
 			System.out.println("error:" + e);
@@ -103,15 +106,16 @@ public class BoardDao {
 		close();
 		return boardList;
 	}
+	*/
 	
-	
+	//검색어가 없거나 게시판 첫화면은 전체 리스트뽑음
 	//게시글 검색(제목으로)
 	public List<BoardVo> searchBoard(String keyword) {
-		//String search = sc.next();
 		List<BoardVo> searchBoard = new ArrayList<BoardVo>();
 		getConnection();
 		try {
 			//SQL문
+			System.out.println(keyword);
 			String query = "";
 			query += " select b.no, ";
 			query += " 		  title, ";
@@ -125,6 +129,7 @@ public class BoardDao {
 			query += " order by b.no desc ";
 			
 			//바인딩
+			System.out.println(keyword);
 			String searchKeyword = '%'+keyword+'%';
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, searchKeyword);
@@ -242,7 +247,7 @@ public class BoardDao {
 	
 	//다른 사람의 글을 읽었을 때 조회수 1 상승
 	//게시글 읽기(글 한개 조회 - 조회수 상승)
-	public int hitUp(BoardVo boardVo) {
+	public int hitUp(int no) {
 		int count = -1 ;
 		this.getConnection();
 		try {
@@ -250,20 +255,19 @@ public class BoardDao {
 			// SQL문 준비
 			String query = "";
 			query += " update board ";
-			query += " set hit = ? ";
+			query += " set hit = hit + 1 ";
 			query += " where no = ? ";
 			
 			// 바인딩
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, boardVo.getHit()+1);	//조회수 1 상승
-			pstmt.setInt(2, boardVo.getNo());
+			pstmt.setInt(1, no);
 			//System.out.println(query);
 			
 			//ResultSet 가져오기
 			count = pstmt.executeUpdate();
 			
 			// 4.결과처리
-			System.out.println("[게시글 "+boardVo.getNo()+"의 조회수가"+count + " 상승되었습니다.]");
+			System.out.println("[게시글 "+no+"의 조회수가"+count + " 상승되었습니다.]");
 			
 		} catch (SQLException e) { 
 			System.out.println("error:" + e);

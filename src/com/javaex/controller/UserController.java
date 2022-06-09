@@ -26,7 +26,7 @@ public class UserController extends HttpServlet{
 		request.setCharacterEncoding("UTF-8");
 		
 		//페이지이름 명명
-		request.setAttribute("controller", "user");
+		//request.setAttribute("controller", "user");
 		
 		//action을 꺼낸다
 		String action = request.getParameter("action");

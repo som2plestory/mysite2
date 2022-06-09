@@ -1,9 +1,10 @@
 package com.javaex.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,7 +29,7 @@ public class BoardController extends HttpServlet{
 		request.setCharacterEncoding("UTF-8");
 		
 		//페이지이름 명명
-		request.setAttribute("controller", "board");
+		//request.setAttribute("controller", "board");
 		
 		//action파라미터 꺼내기
 		String action = request.getParameter("action");
@@ -43,6 +44,7 @@ public class BoardController extends HttpServlet{
 			BoardDao boardDao = new BoardDao();
 			List<BoardVo> searchList = boardDao.searchBoard(keyword); 
 			
+			request.setAttribute("page", 1);
 			request.setAttribute("searchList", searchList);
 			WebUtil.forward(request, response, "/WEB-INF/views/board/list.jsp");
 			
@@ -70,7 +72,7 @@ public class BoardController extends HttpServlet{
 				if(authUser == null ||authUser.getNo()!=boardVo.getUserNo()) {
 					//조회수 1 상승
 					System.out.println("게시글 조회수 상승");
-					boardDao.hitUp(boardVo);
+					boardDao.hitUp(boardVo.getNo());
 					boardVo.setHit(boardVo.getHit()+1);
 				}else {
 					System.out.println("게시글 조회수 그대로");
@@ -184,13 +186,40 @@ public class BoardController extends HttpServlet{
 			}
 			WebUtil.redirect(request, response, "/mysite2/board");
 			
+		}else if("paging".equals(action)) {	
+			System.out.println("BoardController>paging");
+			
+			int page = Integer.parseInt(request.getParameter("page"));
+
+			Map<String, Integer> pageMap = new HashMap<String, Integer>();
+			pageMap.put("begin", page*10 -10);
+			pageMap.put("end", page*10-1);
+			pageMap.put("page", page);
+			if(page%10 != 0) {
+				pageMap.put("pageStart", (page/10)*10 +1);
+				//pageMap.put("pageLast", (page/10)*10 +10);
+				pageMap.put("pageBefore", (page/10)*10);//pageStart-1
+				pageMap.put("pageAfter", (page/10)*10 +11);//pageLast+1
+			}else {//page%10 == 0
+				pageMap.put("pageStart", ((page-1)/10)*10 +1);
+				pageMap.put("pageLast", ((page-1)/10)*10 +10);
+				//pageMap.put("pageBefore", ((page-1)/10)*10);//pageStart-1
+				pageMap.put("pageAfter", ((page-1)/10)*10 +11);//pageLast+1
+			}
+			
+			
+			request.setAttribute("pageMap", pageMap);
+			WebUtil.forward(request, response, "/WEB-INF/views/board/list.jsp");
+			
 		}else {//리스트
 			System.out.println("BoardController>list");
 			
 			BoardDao boardDao = new BoardDao();
-			List<BoardVo> boardList = boardDao.getBoardList(); 
+			String keyword = "";
 			
-			request.setAttribute("boardList", boardList);
+			List<BoardVo> searchList = boardDao.searchBoard(keyword); 
+			request.setAttribute("page", 1);
+			request.setAttribute("searchList", searchList);
 			WebUtil.forward(request, response, "/WEB-INF/views/board/list.jsp");
 		}
 	}

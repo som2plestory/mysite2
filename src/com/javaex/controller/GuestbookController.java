@@ -27,7 +27,7 @@ public class GuestbookController extends HttpServlet{
 		request.setCharacterEncoding("UTF-8");
 		
 		//페이지이름 명명
-		request.setAttribute("controller", "guestbook");
+		//request.setAttribute("controller", "guestbook");
 		
 		//action파라미터 꺼내기
 		String action = request.getParameter("action");

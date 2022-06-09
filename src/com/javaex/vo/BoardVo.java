@@ -1,6 +1,6 @@
 package com.javaex.vo;
 
-public class BoardVo extends UserVo{
+public class BoardVo {
 	
 	//필드
 	private int no;
@@ -9,19 +9,16 @@ public class BoardVo extends UserVo{
 	private int hit;
 	private String regDate;
 	private int userNo;
+	private String userName;
 	
 	
 	//생성자
 	public BoardVo() {
-		super();
 	}
 	
 	public BoardVo(int no) {
-		super();
 		this.no = no;
 	}
-	
-	
 	
 	public BoardVo(int no, String title, int hit, String regDate, int userNo) {
 		super();
@@ -31,8 +28,6 @@ public class BoardVo extends UserVo{
 		this.regDate = regDate;
 		this.userNo = userNo;
 	}
-
-
 
 	public BoardVo(int no, String title, String content, int hit, String regDate, int userNo) {
 		super();
@@ -44,6 +39,16 @@ public class BoardVo extends UserVo{
 		this.userNo = userNo;
 	}
 	
+	public BoardVo(int no, String title, String content, int hit, String regDate, int userNo, String userName) {
+		super();
+		this.no = no;
+		this.title = title;
+		this.content = content;
+		this.hit = hit;
+		this.regDate = regDate;
+		this.userNo = userNo;
+		this.userName = userName;
+	}
 	
 	//메소드 - gs
 	public int getNo() {
@@ -92,6 +97,14 @@ public class BoardVo extends UserVo{
 
 	public void setUserNo(int userNo) {
 		this.userNo = userNo;
+	}
+	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	
