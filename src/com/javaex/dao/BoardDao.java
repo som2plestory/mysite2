@@ -145,7 +145,7 @@ public class BoardDao {
 				int userNo =  rs.getInt("user_no");
 				
 				BoardVo boardVo = new BoardVo(no, title, hit, regDate, userNo);
-				boardVo.setName(name);
+				boardVo.setUserName(name);
 				
 				searchBoard.add(boardVo);
 			}
@@ -233,7 +233,7 @@ public class BoardDao {
 				content = content.replace("\r\n","<br>");
 				
 				boardVo = new BoardVo(boardNo, title, content, hit, regDate, userNo);
-				boardVo.setName(name);
+				boardVo.setUserName(name);
 				
 				//System.out.println(boardVo);
 			}

@@ -74,7 +74,7 @@
 									<tr>
 										<td>${boardVo.no}</td>
 										<td class="text-left"><a href="/mysite2/board?action=read&no=${boardVo.no}">${boardVo.title}</a></td>
-										<td>${boardVo.name}</td>
+										<td>${boardVo.userName}</td>
 										<td>${boardVo.hit}</td>
 										<td>${boardVo.regDate}</td>
 										<c:if test="${authUser.no == boardVo.userNo }">
